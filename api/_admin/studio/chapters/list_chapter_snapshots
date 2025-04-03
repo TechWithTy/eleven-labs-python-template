@@ -1,9 +1,0 @@
-List Chapter Snapshots
-GET
-/v1/studio/projects/:project_id/chapters/:chapter_id/snapshots
-GET
-/v1/studio/projects/:project_id/chapters/:chapter_id/snapshots
-
-curl https://api.elevenlabs.io/v1/studio/projects/21m00Tcm4TlvDq8ikWAM/chapters/21m00Tcm4TlvDq8ikWAM/snapshots \
-
-     -H "xi-api-key: <apiKey>"
