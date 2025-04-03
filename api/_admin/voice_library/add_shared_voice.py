@@ -1,18 +1,10 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-def add_shared_voice(public_user_id: str, voice_id: str, new_name: str):
-    client = get_client()
-    
-    response = client.post(
-        f"/v1/voices/add/{public_user_id}/{voice_id}",
-        json={"new_name": new_name}
-    )
-    
-    return response.json()
-
-# Usage example:
-# public_user_id = "63e06b7e7cafdc46be4d2e0b3f045940231ae058d508589653d74d1265a574ca"
-# voice_id = "21m00Tcm4TlvDq8ikWAM"
-# new_name = "John Smith"
-# result = add_shared_voice(public_user_id, voice_id, new_name)
-# print(result)
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
+)
+client.voices.add_sharing_voice(
+    public_user_id="63e84100a6bf7874ba37a1bab9a31828a379ec94b891b401653b655c5110880f",
+    voice_id="sB1b5zUrxQVAFl2PhZFp",
+    new_name="Alita",
+)

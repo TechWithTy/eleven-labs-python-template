@@ -1,16 +1,8 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-def invite_multiple_users(emails):
-    client = get_client()
-    
-    response = client.post(
-        "/v1/workspace/invites/add-bulk",
-        json={"emails": emails}
-    )
-    
-    return response.json()
-
-# Usage example:
-# emails = ["user1@example.com", "user2@example.com"]
-# result = invite_multiple_users(emails)
-# print(result)
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
+)
+client.workspace.invite_multiple_users(
+    emails=["emails"],
+)

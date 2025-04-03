@@ -1,11 +1,19 @@
-from ....client import get_client
-from typing import Dict
+from typing import Dict, List
+from ...client import get_client
 
-def list_chapters(project_id: str) -> Dict:
+
+def list_chapters(project_id: str) -> List[Dict]:
+    """
+    List all chapters in a studio project.
+
+    Args:
+        project_id: The ID of the project.
+
+    Returns:
+        A list of dictionaries containing chapter details.
+    """
     client = get_client()
     
-    response = client.get(
-        f"/v1/studio/projects/{project_id}/chapters"
+    return client.studio.chapters.list(
+        project_id=project_id,
     )
-    
-    return response.json()

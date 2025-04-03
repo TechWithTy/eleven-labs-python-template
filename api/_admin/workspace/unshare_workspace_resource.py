@@ -1,11 +1,9 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-def unshare_workspace_resource(resource_id: str, resource_type: str):
-    client = get_client()
-    
-    response = client.post(
-        f"/v1/workspace/resources/{resource_id}/unshare",
-        json={"resource_type": resource_type}
-    )
-    
-    return response.json()
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
+)
+client.workspace.unshare_workspace_resource(
+    resource_id="resource_id",
+    resource_type="voice",
+)

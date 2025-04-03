@@ -1,15 +1,8 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-def delete_workspace_invite(email: str):
-    client = get_client()
-    
-    response = client.delete(
-        "/v1/workspace/invites",
-        json={"email": email}
-    )
-    
-    return response.json()
-
-# Usage example:
-# result = delete_workspace_invite("john.doe@testmail.com")
-# print(result)
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
+)
+client.workspace.delete_existing_invitation(
+    email="john.doe@testmail.com",
+)

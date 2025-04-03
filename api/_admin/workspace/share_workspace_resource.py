@@ -1,14 +1,10 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-def share_workspace_resource(resource_id: str, role: str, resource_type: str):
-    client = get_client()
-    
-    response = client.post(
-        f"/v1/workspace/resources/{resource_id}/share",
-        json={
-            "role": role,
-            "resource_type": resource_type
-        }
-    )
-    
-    return response.json()
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
+)
+client.workspace.share_workspace_resource(
+    resource_id="resource_id",
+    role="admin",
+    resource_type="voice",
+)

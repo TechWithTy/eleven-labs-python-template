@@ -1,23 +1,34 @@
+from typing import Dict
 from ...client import get_client
+from elevenlabs.pronunciation_dictionary import (
+    PronunciationDictionaryRule_Alias,
+)
 
-def add_pronunciation_dictionary_rules(pronunciation_dictionary_id: str, rules: list):
+def add_pronunciation_dictionary_rules(pronunciation_dictionary_id: str, rules: list) -> Dict:
+    """
+    Adds rules to a pronunciation dictionary.
+
+    Args:
+        pronunciation_dictionary_id (str): The ID of the dictionary.
+        rules (list): The rules to add.
+
+    Returns:
+        Dict: The response from the API.
+    """
     client = get_client()
-
-    response = client.post(
-        f"/v1/pronunciation-dictionaries/{pronunciation_dictionary_id}/add-rules",
-        json={"rules": rules}
+    return client.pronunciation_dictionary.add_rules(
+        pronunciation_dictionary_id=pronunciation_dictionary_id,
+        rules=rules,
     )
 
-    return response.json()
-
-# Usage example:
-# pronunciation_dictionary_id = "21m00Tcm4TlvDq8ikWAM"
+# # Example usage:
 # rules = [
-#     {
-#         "type": "alias",
-#         "alias": "tie-land",
-#         "string_to_replace": "Thailand"
-#     }
+#     PronunciationDictionaryRule_Alias(
+#         string_to_replace="Thailand",
+#         alias="tie-land",
+#     )
 # ]
-# result = add_pronunciation_dictionary_rules(pronunciation_dictionary_id, rules)
-# print(result)
+# response = add_pronunciation_dictionary_rules(
+#     pronunciation_dictionary_id="21m00Tcm4TlvDq8ikWAM",
+#     rules=rules,
+# )

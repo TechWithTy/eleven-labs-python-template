@@ -1,13 +1,10 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-def get_shared_voices(featured=True, reader_app_enabled=True):
-    client = get_client()
-    
-    params = {
-        "featured": featured,
-        "reader_app_enabled": reader_app_enabled
-    }
-    
-    response = client.get("/v1/shared-voices", params=params)
-    
-    return response.json()
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
+)
+client.voices.get_shared(
+    page_size=1,
+    gender="female",
+    language="en",
+)

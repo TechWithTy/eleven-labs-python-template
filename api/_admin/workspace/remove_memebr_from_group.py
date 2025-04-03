@@ -1,9 +1,9 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-async def remove_member_from_group(group_id: str, email: str):
-    client = get_client()
-    endpoint = f"/v1/workspace/groups/{group_id}/members/remove"
-    payload = {"email": email}
-    
-    response = await client.post(endpoint, json=payload)
-    return response.json()
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
+)
+client.workspace.delete_member_from_user_group(
+    group_id="group_id",
+    email="email",
+)

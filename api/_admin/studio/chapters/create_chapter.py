@@ -1,12 +1,21 @@
-from ....client import get_client
 from typing import Dict
+from ...client import get_client
+
 
 def create_chapter(project_id: str, name: str) -> Dict:
+    """
+    Create a new chapter in a studio project.
+
+    Args:
+        project_id: The ID of the project.
+        name: The name of the chapter.
+
+    Returns:
+        A dictionary containing the chapter details.
+    """
     client = get_client()
     
-    response = client.post(
-        f"/v1/studio/projects/{project_id}/chapters",
-        json={"name": name}
+    return client.studio.chapters.create(
+        project_id=project_id,
+        name=name,
     )
-    
-    return response.json()

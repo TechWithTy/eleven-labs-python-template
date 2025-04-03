@@ -1,11 +1,8 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-def update_member(email: str):
-    client = get_client()
-    
-    response = client.post(
-        "/v1/workspace/members",
-        json={"email": email}
-    )
-    
-    return response.json()
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
+)
+client.workspace.update_member(
+    email="email",
+)

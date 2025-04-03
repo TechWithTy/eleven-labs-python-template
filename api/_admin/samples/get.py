@@ -1,8 +1,16 @@
+from typing import Dict
 from ...client import get_client
 
-def get_sample_audio(voice_id: str, sample_id: str):
+def get_sample(voice_id: str, sample_id: str) -> Dict:
+    """
+    Retrieves a sample for a specific voice.
+
+    Args:
+        voice_id (str): The ID of the voice.
+        sample_id (str): The ID of the sample to retrieve.
+
+    Returns:
+        Dict: The response from the API.
+    """
     client = get_client()
-    
-    response = client.get(f"/v1/voices/{voice_id}/samples/{sample_id}/audio")
-    
-    return response.content
+    return client.samples.get(voice_id=voice_id, sample_id=sample_id)

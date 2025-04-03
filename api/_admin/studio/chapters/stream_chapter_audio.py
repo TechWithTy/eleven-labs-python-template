@@ -1,11 +1,21 @@
-from ....client import get_client
+from typing import Dict
+from ...client import get_client
 
-def stream_chapter_audio(project_id: str, chapter_id: str, chapter_snapshot_id: str):
+
+def stream_chapter_audio(project_id: str, chapter_id: str) -> Dict:
+    """
+    Stream audio for a specific chapter.
+
+    Args:
+        project_id: The ID of the project.
+        chapter_id: The ID of the chapter.
+
+    Returns:
+        A dictionary containing the streaming details.
+    """
     client = get_client()
     
-    response = client.post(
-        f"/v1/studio/projects/{project_id}/chapters/{chapter_id}/snapshots/{chapter_snapshot_id}/stream",
-        json={}
+    return client.studio.chapters.stream_audio(
+        project_id=project_id,
+        chapter_id=chapter_id,
     )
-    
-    return response.content

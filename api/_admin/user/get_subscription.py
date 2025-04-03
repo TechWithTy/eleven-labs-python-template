@@ -1,8 +1,6 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-def get_user_subscription():
-    client = get_client()
-    
-    response = client.get("/v1/user/subscription")
-    
-    return response.json()
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
+)
+client.user.get_subscription()

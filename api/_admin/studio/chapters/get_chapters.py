@@ -1,11 +1,21 @@
-from ....client import get_client
 from typing import Dict
+from ...client import get_client
 
-def get_chapter(project_id: str, chapter_id: str) -> Dict:
+
+def get_chapters(project_id: str, chapter_id: str) -> Dict:
+    """
+    Get details of a specific chapter.
+
+    Args:
+        project_id: The ID of the project.
+        chapter_id: The ID of the chapter.
+
+    Returns:
+        A dictionary containing the chapter details.
+    """
     client = get_client()
     
-    response = client.get(
-        f"/v1/studio/projects/{project_id}/chapters/{chapter_id}"
+    return client.studio.chapters.get(
+        project_id=project_id,
+        chapter_id=chapter_id,
     )
-    
-    return response.json()

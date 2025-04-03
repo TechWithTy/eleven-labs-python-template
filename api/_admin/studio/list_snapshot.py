@@ -1,10 +1,8 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-def list_studio_project_snapshots(project_id: str):
-    client = get_client()
-    
-    response = client.get(
-        f"/v1/studio/projects/{project_id}/snapshots"
-    )
-    
-    return response.json()
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
+)
+client.studio.projects.get_snapshots(
+    project_id="21m00Tcm4TlvDq8ikWAM",
+)

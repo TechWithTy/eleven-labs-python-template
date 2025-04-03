@@ -2,7 +2,7 @@ from typing import Dict
 from ...client import get_client
 
 
-def get_snapshot(project_id: str, chapter_id: str, chapter_snapshot_id: str) -> Dict:
+def get_chapter_snapshot(project_id: str, chapter_id: str, chapter_snapshot_id: str) -> Dict:
     """
     Get details of a specific chapter snapshot.
 

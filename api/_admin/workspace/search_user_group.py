@@ -1,9 +1,8 @@
-from ...client import get_client
+from elevenlabs import ElevenLabs
 
-client = get_client()
-
-response = client.workspace.search_user_group(
-    name="name"
+client = ElevenLabs(
+    api_key="YOUR_API_KEY",
 )
-
-# Process the response as needed
+client.workspace.search_user_groups(
+    name="name",
+)

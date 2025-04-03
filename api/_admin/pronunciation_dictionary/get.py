@@ -1,15 +1,15 @@
+from typing import Dict
 from ...client import get_client
 
-def get_pronunciation_dictionary(pronunciation_dictionary_id: str):
+def get_pronunciation_dictionary(pronunciation_dictionary_id: str) -> Dict:
+    """
+    Retrieves a pronunciation dictionary by ID.
+
+    Args:
+        pronunciation_dictionary_id (str): The ID of the dictionary.
+
+    Returns:
+        Dict: The response from the API.
+    """
     client = get_client()
-
-    response = client.get(
-        f"/v1/pronunciation-dictionaries/{pronunciation_dictionary_id}"
-    )
-
-    return response.json()
-
-# Usage example:
-# pronunciation_dictionary_id = "21m00Tcm4TlvDq8ikWAM"
-# result = get_pronunciation_dictionary(pronunciation_dictionary_id)
-# print(result)
+    return client.pronunciation_dictionary.get(pronunciation_dictionary_id=pronunciation_dictionary_id)
