@@ -1,19 +1,11 @@
-import os
 from typing import BinaryIO
-from ..client import get_client
-
-
-# Import customer voice data function
-from ..api.get_vocie_data import get_customer_voice_data
-
-# Initialize ElevenLabs client
-elevenlabs = Client(api_key=os.getenv("ELEVENLABS_API_KEY"))
+from ..api.client import get_client
+from .get_voice_data import get_customer_voice_data
 
 
 def use_customer_voice(customer_id: str, text: str) -> BinaryIO:
     """
     Use a customer's voice for text generation.
-    This example fetches voices and uses one to generate speech.
 
     Args:
         customer_id: The unique ID of the customer
@@ -30,35 +22,16 @@ def use_customer_voice(customer_id: str, text: str) -> BinaryIO:
     voice_name = customer_data.get("voiceName")
 
     try:
-        # Fetch all available voices
-        voices_response = elevenlabs.voices.get_all()
+        client = get_client()
+        voices = client.voices.get_all()
+        voice = next((v for v in voices if v.name == voice_name), None)
+        if not voice:
+            raise Exception(f"Voice '{voice_name}' not found")
 
-        # Access the array of voices in the response
-        voices = voices_response.voices
-
-        # Find a specific voice by name
-        selected_voice = next(
-            (voice for voice in voices if voice.name == voice_name), None
+        audio_stream = client.generate(
+            text=text, voice=voice.voice_id, model_id="eleven_multilingual_v2"
         )
-
-        if not selected_voice:
-            raise Exception(f"No voice found with the name {voice_name}")
-
-        # Ensure that we are using the correct property for the voice ID
-        voice_id = selected_voice.voice_id
-
-        if not voice_id:
-            raise Exception("No voice ID found for the selected voice")
-
-        # Generate speech using the selected voice
-        audio = elevenlabs.generate(
-            text=text,
-            voice=voice_id,
-            model_id="eleven_multilingual_v2",  # Specify the model for generation
-        )
-
-        print(f"Speech generated successfully using voice: {selected_voice.name}")
-        return audio
+        return audio_stream
     except Exception as error:
-        print(f"Error using voice for customer {customer_id}: {error}")
-        raise Exception("Failed to generate speech using customer voice")
+        print(f"Error generating speech: {error}")
+        raise Exception("Speech generation failed.")
