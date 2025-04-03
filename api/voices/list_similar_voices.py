@@ -1,7 +1,7 @@
 from ..client import get_client
 
 
-def list_similar_voices(api_key, audio_file_path):
+def list_similar_voices( audio_file_path):
     client = get_client()
 
     with open(audio_file_path, "rb") as audio_file:
