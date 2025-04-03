@@ -1,4 +1,4 @@
-from ..client import get_client
+from ...client import get_client
 
 def download_history_items(history_item_ids: list):
     client = get_client()
